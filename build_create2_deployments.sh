@@ -40,6 +40,7 @@ generateDeployment() {
     const initcode = solcOutput[\"bytecode\"][\"object\"].slice(2);
     const d = \"create2/$1\";
     fs.writeFileSync(d + \"/initcode.txt\", initcode);
+    fs.writeFileSync(d + \"/bytecode.txt\", solcOutput[\"deployedBytecode\"][\"object\"].slice(2));
     const t = solcOutput[\"metadata\"][\"settings\"][\"compilationTarget\"], k = Object.keys(t)[0];
     fs.writeFileSync(d + \"/t\", k + \":\" + t[k]);
     fs.writeFileSync(d + \"/initcodehash.txt\", require(\"@ethersproject/keccak256\").keccak256(\"0x\" + initcode));
